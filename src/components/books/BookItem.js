@@ -6,13 +6,13 @@ export class BookItem extends Component {
       <div style={{ marginBottom: "3rem", width: "100%" }}>
         {/* {this.props.book.title} */}
         {/* {1 +1} */}
-        <div>
+       {this.props.book.thumbnail && <div>
           <img
             src={this.props.book.imageLinks.thumbnail}
             width="100px"
             alt="book cover "
           />
-        </div>
+        </div>}
         <div>
           {this.props.book.title && <div>
             <h3 className="inline">Book Title: </h3> {this.props.book.title}
