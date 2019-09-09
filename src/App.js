@@ -18,7 +18,7 @@ export class App extends Component {
   searchBooks = async text => {
     this.setState({ loading: true });
     const res = await axios.get(
-      `https://www.googleapis.com/books/v1/volumes?q=${text}&startIndex=0&maxResults=40&key=${process.env.REACT_APP_GOOGLE_BOOKS_API_KEY}`
+      `https://www.googleapis.com/books/v1/volumes?q=${text}&startIndex=0&maxResults=40`
     );
     this.setState({ books: res.data.items, loading: false });
   };
