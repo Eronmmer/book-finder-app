@@ -43,7 +43,7 @@ img {
 
 /* Utilities */
 .container {
-  max-width: 1100px;
+  max-width: 900px;
   margin: auto;
   overflow: hidden;
   padding: 0 2rem;
@@ -332,6 +332,10 @@ textarea {
   border: 1px solid #ccc;
 }
 
+input[type="checkbox"] {
+  margin-right: 0.4rem;
+}
+
 input[type='submit'],
 button {
   font: inherit;
@@ -377,6 +381,22 @@ table th {
   margin-right: 0.6rem;
 }
 
+.search-filters {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.search-filters-with-submit {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
+  margin-top: -0.3rem;
+  width: 70%;
+}
+
 /* Mobile Styles */
 @media (max-width: 700px) {
   .hide-sm {
@@ -411,6 +431,24 @@ table th {
   .navbar ul {
     text-align: center;
     justify-content: center;
+  }
+
+  .search-filters {
+    width: 100%;
+    order: 2
+  }
+
+  .search-filters-with-submit {
+    flex-direction: column;
+    margin-top: 0;
+    width: 100%;
+  }
+
+  .search-book-btn {
+    display: block;
+    width: 95%;
+    margin: 0 auto;
+    margin-top: 1rem;
   }
 }
 
