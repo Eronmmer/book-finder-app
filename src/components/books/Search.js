@@ -7,7 +7,10 @@ export class Search extends Component {
   };
 
   static propTypes = {
-    searchBooks: PropTypes.func.isRequired
+    searchBooks: PropTypes.func.isRequired,
+    setAlert: PropTypes.func.isRequired,
+    books: PropTypes.array.isRequired,
+    clearBooks: PropTypes.func.isRequired
   };
 
   onChange = e => {
@@ -16,11 +19,16 @@ export class Search extends Component {
 
   onSubmit = e => {
     e.preventDefault();
-    this.props.searchBooks(this.state.text);
-    this.setState({ text: "" });
+    if (!/\S/.test(this.state.text)) {
+      this.props.setAlert("Please enter something", "danger");
+    } else {
+      this.props.searchBooks(this.state.text);
+      this.setState({ text: "" });
+    }
   };
 
   render() {
+    const { clearBooks, books } = this.props;
     return (
       <>
         <form onSubmit={this.onSubmit}>
@@ -50,6 +58,15 @@ export class Search extends Component {
           You can search using anything related to the book like name, author or
           content
         </div>
+        {books && books.length > 0 && (
+          <button
+            onClick={clearBooks}
+            className="btn btn-block btn-danger"
+            style={{ marginTop: "2rem" }}
+          >
+            Clear search results
+          </button>
+        )}
       </>
     );
   }
