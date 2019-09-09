@@ -9,14 +9,16 @@ import axios from "axios";
 
 export class App extends Component {
   state = {
-    books: []
+    books: [],
+    loading: false
   };
 
   searchBooks = async text => {
+    this.setState({loading: true})
     const res = await axios.get(
       `https://www.googleapis.com/books/v1/volumes?q=${text}&startIndex=0&maxResults=40`
     );
-    this.setState({ books: res.data.items });
+    this.setState({ books: res.data.items, loading: false });
   };
 
   render() {
@@ -35,9 +37,8 @@ export class App extends Component {
                   <Fragment>
                     <Search
                       searchBooks={this.searchBooks}
-                      books={this.state.books}
                     />
-                    <Books books={this.state.books} />
+                    <Books books={this.state.books} loading={this.state.loading} />
                   </Fragment>
                 )}
               />

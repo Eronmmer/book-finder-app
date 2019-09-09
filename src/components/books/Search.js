@@ -1,8 +1,13 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 
 export class Search extends Component {
   state = {
     text: ""
+  };
+
+  static propTypes = {
+    searchBooks: PropTypes.func.isRequired
   };
 
   onChange = e => {
@@ -34,15 +39,16 @@ export class Search extends Component {
             onChange={this.onChange}
             value={this.state.text}
           />
-            <input
-              type="submit"
+          <input
+            type="submit"
             value="Search"
             className="btn btn-dark btn-block"
-            />
+          />
         </form>
 
         <div className="form-text">
-          You can search using anything related to the book like name, author or content
+          You can search using anything related to the book like name, author or
+          content
         </div>
       </>
     );

@@ -1,62 +1,86 @@
-import React, { Component } from 'react'
+import React from "react";
+import PropTypes from "prop-types";
 
-export class BookItem extends Component {
-  render() {
-    return (
-      <div style={{ marginBottom: "3rem", width: "100%" }}>
-        {/* {this.props.book.title} */}
-        {/* {1 +1} */}
-        <div>
-          {this.props.book.imageLinks && <img
-            src={this.props.book.imageLinks.thumbnail}
-            width="100px"
-            alt="book cover "
-          />}
-        </div>
-        <div>
-          {this.props.book.title && <div>
-            <h3 className="inline">Book Title: </h3> {this.props.book.title}
-          </div>}
-          {this.props.book.authors && <div>
+const BookItem = ({ book }) => {
+  const {
+    imageLinks,
+    title,
+    authors,
+    publisher,
+    publishedDate,
+    description,
+    pageCount,
+    categories,
+    previewLink
+  } = book;
+  return (
+    <div style={{ marginBottom: "3rem", width: "100%" }}>
+      <div>
+        {imageLinks && (
+          <img src={imageLinks.thumbnail} width="100px" alt="book cover " />
+        )}
+      </div>
+      <div>
+        {title && (
+          <div>
+            <h3 className="inline">Book Title: </h3> {title}
+          </div>
+        )}
+        {authors && (
+          <div>
             <h3 className="inline">Author: </h3>
-            {this.props.book.authors[0]}
-          </div>}
-          {this.props.book.publisher && <div>
-            <h3 className="inline">Publisher: </h3> {this.props.book.publisher}
-          </div>}
-          {this.props.book.publishedDate && <div>
-            <h3 className="inline">Originally Published: </h3>{" "}
-            {this.props.book.publishedDate}
-          </div>}
-          {this.props.book.description && <div>
-            <h3 className="inline">Description: </h3>{" "}
-            {this.props.book.description}
-          </div>}
-          {this.props.book.pageCount && <div>
-            <h3 className="inline">Number of Pages: </h3>{" "}
-            {this.props.book.pageCount}
-          </div>}
-          {this.props.book.categories && <div><h3 className="inline">Categories</h3>: {this.props.book.categories[0]}</div>}
-          {this.props.book.previewLink && <a
-            href={this.props.book.previewLink}
+            {authors[0]}
+          </div>
+        )}
+        {publisher && (
+          <div>
+            <h3 className="inline">Publisher: </h3> {publisher}
+          </div>
+        )}
+        {publishedDate && (
+          <div>
+            <h3 className="inline">Originally Published: </h3> {publishedDate}
+          </div>
+        )}
+        {description && (
+          <div>
+            <h3 className="inline">Description: </h3> {description}
+          </div>
+        )}
+        {pageCount && (
+          <div>
+            <h3 className="inline">Number of Pages: </h3> {pageCount}
+          </div>
+        )}
+        {categories && (
+          <div>
+            <h3 className="inline">Categories</h3>: {categories[0]}
+          </div>
+        )}
+        {previewLink && (
+          <a
+            href={previewLink}
             className="btn btn-dark"
             style={{ display: "inline-block", marginTop: "1rem" }}
           >
             Preview
-          </a>}
-        </div>
-        <div
-          style={{
-            marginTop: "1rem",
-            marginBottom: "3rem",
-            height: "1px",
-            background: "#000"
-          }}
-        ></div>
+          </a>
+        )}
       </div>
-    );
-  }
-}
+      <div
+        style={{
+          marginTop: "1rem",
+          marginBottom: "3rem",
+          height: "1px",
+          background: "#000"
+        }}
+      ></div>
+    </div>
+  );
+};
 
-export default BookItem
+BookItem.propTypes = {
+  book: PropTypes.object.isRequired
+};
 
+export default BookItem;

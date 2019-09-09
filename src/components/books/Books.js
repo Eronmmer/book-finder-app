@@ -1,13 +1,17 @@
-import React, { Component } from "react";
+import React from "react";
 import BookItem from "./BookItem";
+import Spinner from "../layout/Spinner";
+import PropTypes from "prop-types";
 
-export class Books extends Component {
-  render() {
+const Books = ({ loading, books }) => {
+  if (loading) {
+    return <Spinner />;
+  } else {
     return (
       <div>
-        {this.props.books && this.props.books.length > 0 && (
+        {books && books.length > 0 && (
           <div className="books">
-            {this.props.books.map(book => (
+            {books.map(book => (
               <BookItem key={book.id} book={book.volumeInfo} />
             ))}
           </div>
@@ -15,6 +19,11 @@ export class Books extends Component {
       </div>
     );
   }
-}
+};
+
+Books.propTypes = {
+  loading: PropTypes.bool.isRequired,
+  books: PropTypes.array.isRequired
+};
 
 export default Books;
