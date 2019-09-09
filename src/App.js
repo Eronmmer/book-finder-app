@@ -8,14 +8,6 @@ import Books from "./components/books/Books";
 import Alert from "./components/layout/Alert";
 import axios from "axios";
 
-let apiKey
-
-if ( process.env.NODE_ENV !== 'production' ) {
-  apiKey = process.env.REACT_APP_GOOGLE_BOOKS_API_KEY;
-} else {
-  apiKey = process.env.GOOGLE_BOOKS_API_KEY;
-}
-
 export class App extends Component {
   state = {
     books: [],
@@ -26,7 +18,7 @@ export class App extends Component {
   searchBooks = async text => {
     this.setState({ loading: true });
     const res = await axios.get(
-      `https://www.googleapis.com/books/v1/volumes?q=${text}&startIndex=0&maxResults=40&key=${apiKey}`
+      `https://www.googleapis.com/books/v1/volumes?q=${text}&startIndex=0&maxResults=40&key=${process.env.REACT_APP_GOOGLE_BOOKS_API_KEY}`
     );
     this.setState({ books: res.data.items, loading: false });
   };
