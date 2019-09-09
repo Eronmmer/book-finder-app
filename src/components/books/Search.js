@@ -1,10 +1,24 @@
 import React, { Component } from "react";
 
 export class Search extends Component {
+  state = {
+    text: ""
+  };
+
+  onChange = e => {
+    this.setState({ text: e.target.value });
+  };
+
+  onSubmit = e => {
+    e.preventDefault();
+    this.props.searchBooks(this.state.text);
+    this.setState({ text: "" });
+  };
+
   render() {
     return (
       <>
-        <form>
+        <form onSubmit={this.onSubmit}>
           <input
             type="text"
             name="text"
@@ -17,32 +31,18 @@ export class Search extends Component {
               borderBottom: "2px solid #1769ee",
               outline: "none"
             }}
+            onChange={this.onChange}
+            value={this.state.text}
           />
-          <div className="search-filters-with-submit">
-            <div className="search-filters">
-              <div className="filter-flex-item">
-                <input type="checkbox" name="author" id="author" />
-                <label htmlFor="author">By Author</label>
-              </div>
-              <div className="filter-flex-item">
-                <input type="checkbox" name="publisher" id="publisher" />
-                <label htmlFor="publisher">By Publisher</label>
-              </div>
-              <div className="filter-flex-item">
-                <input type="checkbox" name="bookName" id="bookName" />
-                <label htmlFor="bookName">By Book Name</label>
-              </div>
-            </div>
             <input
               type="submit"
-              value="Search"
-              className="btn btn-dark search-book-btn"
+            value="Search"
+            className="btn btn-dark btn-block"
             />
-          </div>
         </form>
 
         <div className="form-text">
-          You can use the checkboxes above to filter your search.
+          You can search using anything related to the book like name, author or content
         </div>
       </>
     );

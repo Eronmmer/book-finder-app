@@ -4,8 +4,21 @@ import Navbar from "./components/layout/Navbar";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import About from "./components/pages/About";
 import Search from "./components/books/Search";
+import Books from './components/books/Books'
+import axios from "axios";
 
 export class App extends Component {
+  state = {
+    books: []
+  };
+
+  searchBooks = async text => {
+    const res = await axios.get(
+      `https://www.googleapis.com/books/v1/volumes?q=${text}&startIndex=0&maxResults=40`
+    );
+    this.setState({ books: res.data.items });
+  };
+
   render() {
     return (
       <Router>
@@ -20,7 +33,11 @@ export class App extends Component {
                 path="/"
                 render={props => (
                   <Fragment>
-                    <Search />
+                    <Search
+                      searchBooks={this.searchBooks}
+                      books={this.state.books}
+                    />
+                    <Books books={this.state.books} />
                   </Fragment>
                 )}
               />
